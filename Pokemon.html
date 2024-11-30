@@ -1,0 +1,132 @@
+<!-- Braden Penner -->
+<!-- Section 2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Battle Game</title>
+  <style>
+    /* Basic styling */
+    #gameArea, #playButton, #pokemon1, #pokemon2, #pokemonImage1, #pokemonImage2, #winnerLabel {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body onload="askToPlay()">
+  <!-- Main Game Area -->
+  <div id="gameArea">
+    <!-- Labels for Pokemon Names -->
+    <label id="pokemon1"></label>
+    <img id="pokemonImage1" src="" alt="Pokemon 1" width="100">
+    <label id="pokemon2"></label>
+    <img id="pokemonImage2" src="" alt="Pokemon 2" width="100">
+    <button id="playButton" onclick="playPokemon()">Play</button>
+    <!-- Winner label to display the result of each round -->
+    <label id="winnerLabel"></label>
+  </div>
+
+  <!-- Game History -->
+  <p id="gameHistory"></p>
+  <script>
+    // declare arrays and variables
+    let asPokemonImages1 = ["pikachu.jpg", "eevee.jpg", "snorlax.jpg"];
+    let asPokemonImages2 = ["garchomp.jpg", "lucario.jpg", "ditto.jpg"];
+    let asPokemon1 = ["Pikachu", "Eevee", "Snorlax"];
+    let asPokemon2 = ["Garchomp", "Lucario", "Ditto"];
+    let pokemon1wins = 0, pokemon2wins = 0;
+    let aPokemon1losses = [0, 0, 0];
+    let aPokemon2losses = [0, 0, 0];
+    let currentPokemon1 = 0, currentPokemon2 = 0;
+    let team1wins = 0; team2wins = 0;
+    let battleResults = [];
+
+    // have the page ask if user wants to play as the page loads
+    function askToPlay() {
+        let userInput = prompt("Do you want to play?");
+        if (userInput[0].toLowerCase() !== "y") {
+            alert("No worries. Come back and play again later!");
+            return;
+        }
+        document.getElementById("gameArea").style.display = "block";
+        document.getElementById("pokemon1").style.display = "block";
+        document.getElementById("pokemonImage1").style.display = "block";
+        document.getElementById("pokemon2").style.display = "block";
+        document.getElementById("pokemonImage2").style.display = "block";
+        document.getElementById("playButton").style.display = "block";
+        updatePokemonDisplay();
+    }
+
+    // Update the display with current Pokémon
+    function updatePokemonDisplay() {
+        document.getElementById("pokemon1").innerHTML = asPokemon1[currentPokemon1];
+        document.getElementById("pokemonImage1").src = asPokemonImages1[currentPokemon1];
+        document.getElementById("pokemon2").innerHTML = asPokemon2[currentPokemon2];
+        document.getElementById("pokemonImage2").src = asPokemonImages2[currentPokemon2];
+    }
+
+    // function that works on click to simulate a pokemon battle
+    function playPokemon() {
+        let pokemon1score = Math.floor(Math.random() * 21);
+        let pokemon2score = Math.floor(Math.random() * 21);
+
+
+        while (pokemon2score == pokemon1score) {
+            pokemon1score = ath.floor(Math.random() * 21);
+            pokemon2score = Math.floor(Math.random() * 21);
+        }
+
+        // put the battle result into the p tag
+        let resultText = `${asPokemon1[currentPokemon1]} ${pokemon1score} - ${asPokemon2[currentPokemon2]} ${pokemon2score}<br>`;
+        battleResults.push(resultText);
+
+        // decide who won and display it to the winner label
+        if (pokemon1score > pokemon2score) {
+            aPokemon2losses[currentPokemon2]++;
+            team1wins++;
+            document.getElementById("winnerLabel").innerHTML = `${asPokemon1[currentPokemon1]} wins!`;
+        } 
+        else {
+            aPokemon1losses[currentPokemon1]++;
+            team2wins++;
+            document.getElementById("winnerLabel").innerHTML = `${asPokemon2[currentPokemon2]} wins!`;
+        }
+        document.getElementById("winnerLabel").style.display = "block";
+
+        // if needed, update pokemon with 3 losses
+        if (aPokemon1losses[currentPokemon1] == 3) {
+            currentPokemon1++;
+        }
+        if (aPokemon2losses[currentPokemon2] == 3) {
+            currentPokemon2++;
+        }
+
+        // end the game once all three pokemon of one team has 3 losses
+        if (currentPokemon1 >= asPokemon1.length || currentPokemon2 >= asPokemon2.length) {
+            displayGameResults();
+            alert("Game over! Thanks for playing.");
+            document.getElementById("playButton").style.display = "none";
+            pokemon1wins = 0, pokemon2wins = 0;
+            aPokemon1losses = [0, 0, 0];
+            aPokemon2losses = [0, 0, 0];
+            currentPokemon1 = 0, currentPokemon2 = 0;
+            document.getElementById("winnerLabel").style.display = "none";
+            askToPlay();
+        }
+        else {
+            updatePokemonDisplay();
+        }
+    }
+
+    // display the results to the p tag on the page
+    function displayGameResults() {
+        let gameHistoryText = "";
+        for (let i = 0; i < battleResults.length; i++) {
+            gameHistoryText += battleResults[i] + "<br>";
+        }
+        document.getElementById("gameHistory").innerHTML = gameHistoryText;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let aTeams = [];
+        // let aTeams = new Array(4);
+        /* let aTeams = ["UVU", "BYU", "WSU", "USU", "UOFU"];
+
+        aTeams.sort();
+        aTeams.reverse(); // these two lines of code allows us to desc sort an array of strings
+
+        for (let iCount =0; iCount < aTeams.length; iCount++) {
+            console.log(aTeams[iCount])
+        }
+        
+        aTeams.forEach(sTeamName => {
+            console.log(sTeamName);
+        })
+        */
+        let aWins = [
+            ["BYU", 7],
+            ["UOFU", 40],
+            ["WSU", 5],
+            ["USU", 1],
+            ["UVU", 8]
+        ];
+
+        aWins.sort((a, b) => b[1] - a[1]); // b-a is desc, a-b, is asc
+
+        aWins.forEach(iWins => {
+            console.log(iWins);
+        })     
+    </script>    
+</body>
+</html>

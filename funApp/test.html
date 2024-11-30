@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/storeIt" method="POST">
+      <fieldset style="width: 0px;">
+        <br>
+        <legend>Employee Info:</legend>
+          <label for="empFirst">First Name:</label>
+          <input type="text" id="empFirst" name="empFirst">
+          <br><br>
+          <label for="empLast">Last Name:</label>
+          <input type="text" id=" empLast " name="empLast">
+          <br><br>
+          <fieldset>
+            <legend>Work Status:</legend>
+              <input type="radio" id="rbFulltime" name="workstatus" value="F" checked>
+              <label for="rbFulltime">Full-time</label>
+              <br>
+              <input type="radio" id="rbParttime" name="workstatus" value="P">
+              <label for="rbParttime">Part-time</label>
+              <br>
+          </fieldset>
+          <br>
+      </fieldset>
+      <br>
+      <button type="submit">Save</button>
+    </form>
+  </body>
+</html>

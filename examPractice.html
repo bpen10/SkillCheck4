@@ -1,0 +1,58 @@
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+</head>
+
+<body>
+
+<button type="button" onclick="goForTheGold()">Go</button>
+<p id="olympicOutput"></p>
+
+<script>
+    // Braden Penner
+    // Section 2
+    function goForTheGold() {
+        // Declare Variables
+        let athleteNames = [];
+        let monetaryValues = [];
+        let messages = [];
+        // First figure out the number of times we will iterate through the for loop
+        let numAthletes = prompt("How many athletes to process?");
+        // Break out of loop if the user enters 0
+        if (numAthletes == 0) {return}
+        // Collect user input for each athlete and add them to arrays
+        for (let i = 1; i <= numAthletes; i++) {
+            let athlete = prompt("Enter Athlete " + i + "'s name: ");
+            athleteNames.push(athlete);
+            let numGold = prompt("Enter " + athlete + "'s number of Gold Medals: ");
+            let numSilver = prompt("Enter " + athlete + "'s number of Silver Medals: ");
+            let numBronze = prompt("Enter " + athlete + "'s number of Bronze Medals: ");
+            // Calculate monetary value
+            let monValue = (numGold*37500) + (numSilver*22500) + (numBronze*15000);
+            monetaryValues.push(monValue);
+            // Figure out message to display
+            if (monValue >= 500000) {
+                messages.push("Become a sports commentator");
+            }
+            else if (monValue >= 250000) {
+                messages.push("You are rich and famous");
+            }
+            else {
+                messages.push("Great Job! Keep Training!");
+            }
+        }
+        // Clear the previous output
+        document.getElementById("olympicOutput").innerHTML = "";
+        // Display the output in the p tag
+        for (let i = 0; i <= athleteNames.length - 1; i++) {
+            document.getElementById("olympicOutput").innerHTML += "<br>Name: " + athleteNames[i] + " | Monetary Value: $" + monetaryValues[i].toLocaleString() + " | Message: " + messages[i];
+        }
+    }
+</script>
+</body>
+
+</html>

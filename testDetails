@@ -1,0 +1,51 @@
+- 3 hours
+- program worth 70% of the test
+PAY ATTENTION TO THE DETAILS
+KNOW HOW TO USE THE DEBUGGER
+
+know the following:
+
+how to declare a variable:
+- let
+- var
+- const
+- case sensitive
+how to get data from the keyboard:
+- prompt
+how to convert
+- parseInt()
+- parseFloat()
+how to display message
+- alert
+know assignment vs. comparison:
+- = vs. == vs. ===
+if statement
+- expression always in parentheses
+- curly braces important, if no braces, only one statement accepted
+random numbers:
+- Math.floor(Math.random()*50) + 1
+iteration
+- post vs. pre
+- ++iCount (highest level of order of operation, it will go first) vs. iCount++ (lowest level of order of operation, it goes last)
+for loop
+- if a ; before {}, never goes through it
+- for(let iCount = 0; iCount < 5; iCount++)
+onload
+- <body onload="sample()"> This calls a function as the page loads up
+loops
+- while (checks condition before)
+- for
+- do while (executes at least once. does loop then checks condition)
+logical operators
+
+PROGRAM:
+
+- name, comments, id's immediately
+- body, h1, div, img, etc.
+- input (type="number")
+- event handlers (onclick, onload)
+- know how to write a function
+- know how to dynamically change an img with the contents of a variable
+- know how to work with arrays and nested arrays
+- sort a nested array
+- know how to push

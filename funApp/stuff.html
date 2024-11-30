@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <form action="/storeData" method="POST">
+            <fieldset style="width: 0px;">
+                <legend>Employee Information:</legend>
+                    <input id="empID" name="empID" type="hidden" value="738291">
+                    <br><br>
+                    <label for="txtEmpFirst">First Name:</label>
+                    <input type="text" id="txtEmpFirst" name="txtEmpFirst" value="Mary" readonly>
+                    <br><br>
+                    <label for="txtEmpLast">Last Name:</label>
+                    <input type="text"  id="txtEmpLast" name="txtEmpLast" value="Lamb" readonly>
+                    <br><br>
+                    <label for="listJob">Job:</label>
+                    <select id="listJob" name="listJob" required>
+                        <option value="DB">Database Administrator</option>
+                        <option value="PM">Project Manager</option>
+                        <option value="SD">Software Developer</option>
+                        <option value="TE">Testing Engineer</option>
+                    </select>
+                    <br><br>
+                    <fieldset style="width: 100px;">
+                        <legend>Favorite Breakfast:</legend>
+                            <input type="checkbox" id="cbSpam" name="bfast" value="spam">
+                            <label for="cbSpam">Spam</label><br>
+                            <input type="checkbox" id="cbBacon" name="bfast" value="bacon">
+                            <label for="cbBacon">Bacon</label><br>
+                            <input type="checkbox" id="cbOther" name="bfast" value="other">
+                            <label for="cbOther">Other</label>
+                    </fieldset>
+                    <br><br>
+                    <button type="button" onclick="genQuery();">Query</button>
+            </fieldset>
+        </form>
+        <br><br>
+        <p id="myOutput"></p>
+        <script>
+            function genQuery()
+            {
+                let items = document.getElementsByName('bfast');
+                let meats = [];
+
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].checked) {
+                        meats.push(`"${items[i].value}"`)
+                    }
+                }
+                console.log("UPDATE Employees\n" + 
+                    "SET calories = 2000\n" +
+                    "WHERE Meat in (" + meats + ")\n" +
+                    "AND EmpID = " + document.getElementById('empID').value
+                )
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!--Braden Penner Section 2-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guesser</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Guess the Number!</h1>
+    <p style="text-align: center;">Enter a number between 1 and 50:<br><br>
+        <input type="number" id="numGuess">
+        <button onclick="ProcessGuess()">Submit Guess</button>
+    </p>
+    <p id="message" style="text-align: center;"></p>
+    <p style="text-align: center;">
+        <button hidden id="playAgain" onclick="location.reload()">Play Again</button>
+    </p>
+    <script>
+        // generate the answer, outside of function so user can keep guessing
+        let answer = Math.floor(Math.random()*50) + 1;
+        function ProcessGuess()
+        {
+            // grab the value from the dom for the guess
+            let numGuess = document.getElementById("numGuess").value;
+            // make sure guess is within appropriate range
+            if (numGuess < 1 || numGuess > 50)
+            {
+                alert("Guess is not in the proper range. Try Again!");
+                return;
+            }
+            // generate the result based on their answer
+            if (numGuess == answer)
+            {
+                document.getElementById('message').innerText = "Congratulations! You guessed the number.";
+                document.getElementById('playAgain').hidden = false;
+            }
+            else if (numGuess < answer)
+            {
+                document.getElementById('message').innerText = "Too low! Try again";
+            }
+            else
+            {
+                document.getElementById('message').innerText = "Too High! Try again";
+            }
+        }
+    </script>
+</body>
+</html>

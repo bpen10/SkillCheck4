@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pumpkin Patch</title>
+  <script type="text/javascript" src="/ruxitagentjs_ICA7NVfqrux_10299241001084140.js" data-dtconfig="rid=RID_1176964695|rpid=-633152452|domain=byu.edu|reportUrl=/rb_bf19966hyx|app=1964a903cfe5f82b|cuc=lg366a9h|mel=100000|expw=1|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1729112645568|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10299241001084140.js"></script><style>
+    /* General Styling */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      color: #ff8c00;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    #inventory, #bestCustomer {
+      max-width: 300px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    #inventory div {
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-size: 1rem;
+      margin-right: 5px;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+    }
+
+    button {
+      padding: 8px 15px;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #ff8c00;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e07b00;
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- div[id="inventory"]-->
+  <h1>Charlie Brown's Pumpkin Patch</h1>
+  <div id="inventory">
+    <div>
+        <label for="">Carving Pumpkins</label>
+        <input type="number" id="CARVING" min="0" max="50" value="0">
+    </div>
+    <div>
+        <label for="">Pie Pumpkins</label>
+        <input type="number" id="PIE" min="0" max="50" value="0">
+    </div>
+    <div>
+        <label for="">Baby White Pumpkins</label>
+        <input type="number" id="BABY WHITE" min="0" max="50" value="0">
+    </div>
+    <div>
+        <label for="">Cinderella Pumpkins</label>
+        <input type="number" id="CINDERELLA" min="0" max="50" value="0">
+    </div>
+    <button onclick="openShop()">Open Shop</button>
+  </div>
+  <div id="bestCustomer" hidden>
+    <h2>Best Customer</h2>
+    <img src="" id="customerImage" height="200px">
+    <h3 id="customerName"></h3>
+    <br>
+    <p id="salesSummary"></p>
+    <button onclick="nextDay()">Next Day</button>
+  </div>
+  <script>
+    let asPumpkins = ["CARVING", "PIE", "BABY WHITE", "CINDERELLA"];
+    let asCustomers = ["SNOOPY", "LINUS", "SALLY", "LUCY"];
+
+    let asInventory = [];
+    let currentCustomer = 0;
+    let asReceipts = [[], [], [], []];
+
+    function openShop() {
+        for (let i = 0; i < asPumpkins.length; i++) {
+            let numPumpkin = parseInt(document.getElementById(asPumpkins[i]).value);
+            asInventory.push(numPumpkin);
+        }
+        document.getElementById("inventory").hidden = true;
+        checkoutCustomer();
+    }
+    function checkoutCustomer() {
+        for (let i = 0; i < asPumpkins.length; i++) {
+            let rndNum;
+            if (asInventory[i] > 10) {
+                rndNum = Math.floor(Math.random()*11);
+            }
+            else {
+                rndNum = Math.floor(Math.random()*(asInventory[i]+1));
+            }
+            asReceipts[currentCustomer].push(rndNum);
+            asInventory[i] -= rndNum;
+        }
+        if(++currentCustomer < asCustomers.length) {
+            checkoutCustomer();
+        }
+        else {
+            salesSummary();
+        }
+    }
+    function salesSummary() {
+        let summary = "<h2> Sales Summary </h2>";
+        let asTotals = [["SNOOPY", 0],["LINUS", 0],["SALLY", 0],["LUCY", 0]];
+        for (let i = 0; i < asCustomers.length; i++) {
+            summary += "<b>" + asCustomers[i] + "</b>";
+            for (let j = 0; j < asPumpkins.length; j++) {
+                summary += "<p>" + asPumpkins[j].toLowerCase() + " Pumpkin(s): " + asReceipts[i][j] + "</p>";
+                asTotals[i][1] += asReceipts[i][j];
+            }
+        }
+        asTotals.sort((a,b) => b[1] - a[1]);
+        let bestCustomer = asTotals[0][0];
+        document.getElementById("customerImage").src = bestCustomer.toLowerCase() + ".jpg";
+        document.getElementById("customerName").innerHTML = bestCustomer;
+        document.getElementById("salesSummary").innerHTML = summary;
+        document.getElementById("bestCustomer").hidden = false;
+    }
+    function nextDay() {
+        asInventory = [];
+        currentCustomer = 0;
+        asReceipts = [[], [], [], []];
+        for (let i = 0; i < asPumpkins.length; i++) {
+            document.getElementById(asPumpkins[i]).value = 0;            
+        }
+        document.getElementById("bestCustomer").hidden = true;
+        document.getElementById("inventory").hidden = false;
+    }
+  </script>
+</body>
+</html>

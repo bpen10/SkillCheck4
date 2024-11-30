@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .main-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .main-image-container img {
+            width: 120px;
+            height: 120px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .dice {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .roll-btn, .reset-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .roll-btn:hover, .reset-btn:hover {
+            background-color: #45a049;
+        }
+        .hidden-label {
+            display: none;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        .stats-btn {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let dieRandom;
+        let dieRolls;
+        let cntRolls = 0;
+
+        function startGame() {
+            let mainImg = document.getElementById('mainImg');
+
+            dieRandom = Math.floor(Math.random() * 6) + 1;
+
+            mainImg.src = "dice" + dieRandom + ".jpg";
+            document.getElementById('btn1').hidden = false;
+        }
+    </script>
+    <h1>Dice Roll Game</h1>
+
+    <!-- Main Image Container -->
+    <div class="main-image-container">
+        <img id="mainImg" src="https://via.placeholder.com/120" alt="Main Dice" >
+        <button id="btnMain" class="roll-btn" onclick="startGame()">Roll Main Dice</button>
+    </div>
+
+    <!-- Dice Images Row -->
+    <div class="dice-container">
+        <!-- Dice 1 -->
+        <div class="dice">
+            <label>Dice 1</label>
+            <img id="img1" src="https://via.placeholder.com/100" alt="Dice 1" hidden>
+            <button id="btn1" class="roll-btn" hidden>Roll</button>
+            <span>Result: 0</span>
+        </div>
+        <!-- Dice 2 -->
+        <div class="dice">
+            <label>Dice 2</label>
+            <img src="https://via.placeholder.com/100" alt="Dice 2" >
+            <button class="roll-btn" >Roll</button>
+            <span>Result: 0</span>
+        </div>
+        <!-- Dice 3 -->
+        <div class="dice">
+            <label>Dice 3</label>
+            <img src="https://via.placeholder.com/100" alt="Dice 3" >
+            <button class="roll-btn" >Roll</button>
+            <span>Result: 0</span>
+        </div>
+        <!-- Dice 4 -->
+        <div class="dice">
+            <label>Dice 4</label>
+            <img src="https://via.placeholder.com/100" alt="Dice 4" >
+            <button class="roll-btn">Roll</button>
+            <span>Result: 0</span>
+        </div>
+        <!-- Dice 5 -->
+        <div class="dice">
+            <label>Dice 5</label>
+            <img src="https://via.placeholder.com/100" alt="Dice 5" >
+            <button class="roll-btn" >Roll</button>
+            <span>Result: 0</span>
+        </div>
+    </div>
+    <br>
+    <br>
+    <p id="total_rolls"></p>
+    <br>
+    <br>
+    <p id="stats"></p>
+    <br>
+    <br>    
+    <!-- Stats Button -->
+    <button class="stats-btn">Show Stats</button>    
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Match</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #ff4500;
+            margin-bottom: 20px;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #007acc;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #007acc;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        button {
+            background-color: #ff4500;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #e03e00;
+        }
+        .results {
+            text-align: center;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+        }
+        .results h2 {
+            color: #007acc;
+        }
+        .image-container img {
+            margin: 20px;
+            max-width: 100px;
+        }
+        canvas {
+            margin-top: 20px;
+            border: 1px solid #007acc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Make a Match</h1>
+    
+    <div class="container">
+        <label for="first-name">First Full Name</label>
+        <input type="text" id="first-name" placeholder="Enter first full name">
+        
+        <label for="second-name">Second Full Name</label>
+        <input type="text" id="second-name" placeholder="Enter second full name">
+        
+        <button onclick="calcPct()">Match</button>
+
+        <div class="results">
+            <h2>Results</h2>
+            <p id="percentage-result"></p>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="https://via.placeholder.com/100" alt="Couple icon">
+        <img src="https://via.placeholder.com/100" alt="Heart icon">
+        <img src="https://via.placeholder.com/100" alt="Match icon">
+    </div>
+
+    <canvas id="heartCanvas" width="200" height="200"></canvas>
+
+    <script>
+        function calcPct() {
+            let sFirst = document.getElementById("first-name").value;
+            let sSecond = document.getElementById("second-name").value;
+            let sTotal = sFirst + sSecond;
+            let icount = 0; // initialize the count variable
+
+            // Loop through each character in sTotal
+            for (let char of sTotal) {
+                // Check if the character exists in the string "TRUELOVE"
+                if ("TRUELOVE".includes(char.toUpperCase())) {
+                    icount += 1; // increment the count if the character is found
+                }
+            }
+
+            let percentage = Math.min(Math.floor((icount / sTotal.length) * 100), 100);
+            document.getElementById("percentage-result").textContent = `Match Percentage: ${percentage}%`;
+            
+            drawHeart(percentage / 10); // Scale percentage for drawing (1 = 10%, etc.)
+        }
+
+        function drawHeart(percentage) {
+            const canvas = document.getElementById("heartCanvas");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.moveTo(100, 150); // Start at the bottom of the heart
+
+            // Left curve
+            ctx.bezierCurveTo(50, 130, 20, 100, 50, 60);
+            ctx.bezierCurveTo(80, 20, 120, 20, 150, 60);
+
+            // Right curve
+            ctx.bezierCurveTo(180, 100, 150, 130, 100, 150);
+
+            ctx.closePath();
+            ctx.clip();
+
+            // Draw the percentage of the heart
+            ctx.fillStyle = "red";
+            ctx.fillRect(0, canvas.height * (1 - percentage), canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>
+

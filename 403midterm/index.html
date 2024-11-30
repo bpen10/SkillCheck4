@@ -1,0 +1,180 @@
+<!--Braden Penner: Section 2-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Disneyland Ride Rater</title>
+  <script type="text/javascript" src="/ruxitagentjs_ICA7NVfqrux_10299241001084140.js" data-dtconfig="rid=RID_-1028181392|rpid=-1032636567|domain=byu.edu|reportUrl=/rb_bf19966hyx|app=1964a903cfe5f82b|cuc=lg366a9h|mel=100000|expw=1|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1729112645568|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICA7NVfqrux_10299241001084140.js"></script><script type="text/javascript" src="/ruxitagentjs_ICANVfqru_10299241001084140.js" data-dtconfig="rid=RID_-133940852|rpid=-1715997573|domain=byu.edu|reportUrl=https://bf19966hyx.bf.dynatrace.com/bf|app=ea7c4b59f27d43eb|cuc=lg366a9h|cors=1|mel=100000|featureHash=ICANVfqru|dpvc=1|lastModification=1729112645568|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICANVfqru_10299241001084140.js"></script><script type="text/javascript" src="/ruxitagentjs_ICANVfqru_10299241001084140.js" data-dtconfig="rid=RID_178568895|rpid=-838027919|domain=byu.edu|reportUrl=https://bf19966hyx.bf.dynatrace.com/bf|app=ea7c4b59f27d43eb|cuc=lg366a9h|cors=1|mel=100000|featureHash=ICANVfqru|dpvc=1|lastModification=1729112645568|tp=500,50,0|rdnt=1|uxrgce=1|agentUri=/ruxitagentjs_ICANVfqru_10299241001084140.js"></script><style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    .ride_container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
+    }
+    label {
+      width: 200px;
+    }
+    input[type="number"] {
+      width: 50px;
+    }
+    img {
+      width: 150px;
+      height: auto;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body onload="displayCharacter(); displayRides();">
+  <h1>Disneyland Ride Rater</h1>
+  <div>
+    <img id="characterImg" src="">
+    <p id="characterName"></p>
+  </div>
+
+  <div>
+    <div>
+      <label id="name0">JUNGLE CRUISE</label>
+      <input type="number" id="JUNGLE CRUISE" min="0" max="10" value="">
+    </div>
+    <div>
+      <label id="name1">BIG THUNDER RAILROAD</label>
+      <input type="number" id="BIG THUNDER RAILROAD" min="0" max="10" value="">
+    </div>
+    <div>
+      <label id="name2">RISE OF THE RESISTANCE</label>
+      <input type="number" id="RISE OF THE RESISTANCE" min="0" max="10" value="">
+    </div>
+    <div>
+      <label id="name3">SMUGGLER'S RUN</label>
+      <input type="number" id="SMUGGLER'S RUN" min="0" max="10" value="">
+    </div>
+    <div>
+      <label id="name4">SPACE MOUNTAIN</label>
+      <input type="number" id="SPACE MOUNTAIN" min="0" max="10" value="">
+    </div>
+    <div>
+      <label id="name5">BUZZ LIGHTYEAR</label>
+      <input type="number" id="BUZZ LIGHTYEAR" min="0" max="10" value="">
+    </div>
+    <div>
+      <label id="name6">PETER PAN'S FLIGHT</label>
+      <input type="number" id="PETER PAN'S FLIGHT" min="0" max="10" value="">
+    </div>
+  </div>
+  
+  <button onclick="clearData()">Clear</button>
+  <button onclick="storeData()">Store</button>
+
+  <p id="avgRatings"></p>
+<script>
+    // declare variables used throughout the program
+    let asRides = [
+        "JUNGLE CRUISE", 
+        "BIG THUNDER RAILROAD", 
+        "RISE OF THE RESISTANCE",
+        "SMUGGLER'S RUN",
+        "SPACE MOUNTAIN",
+        "BUZZ LIGHTYEAR",
+        "PETER PAN'S FLIGHT"
+    ];
+    let asCharacters = [
+        "MICKEY",
+        "DONALD",
+        "GOOFY",
+        "ELSA",
+        "RAPUNZEL"
+    ];
+    let aiRideRatings = [
+        [[], [], [], [], [], [], []],
+        [[], [], [], [], [], [], []],
+        [[], [], [], [], [], [], []],
+        [[], [], [], [], [], [], []],
+        [[], [], [], [], [], [], []]
+    ];
+    let aiSummary = [
+        ["JUNGLE CRUISE", 0], 
+        ["BIG THUNDER RAILROAD", 0], 
+        ["RISE OF THE RESISTANCE", 0],
+        ["SMUGGLER'S RUN", 0],
+        ["SPACE MOUNTAIN", 0],
+        ["BUZZ LIGHTYEAR", 0],
+        ["PETER PAN'S FLIGHT", 0]
+    ];
+    let currentCharacter = 0;
+    function displayCharacter() {
+        document.getElementById("characterImg").src = asCharacters[currentCharacter].toLowerCase() + ".jpg";
+        document.getElementById("characterName").innerHTML = "<b>" + asCharacters[currentCharacter] + "</b>";
+    }
+    function displayRides() {
+        for (i=0; i < asRides.length; i++) {
+            document.getElementById("name" + i.toString()).innerHTML = asRides[i];
+            document.getElementById(asRides[i]).value = Math.floor(Math.random()*11);
+        }
+    }
+    // this function takes the random numbers generated in display rides and stores it to an array
+    // it also changse the screen to the next character
+    function storeData() {
+        for (i=0; i < asRides.length; i++) {
+            let rating = document.getElementById(asRides[i]).value;
+            aiRideRatings[currentCharacter][i].push(asCharacters[currentCharacter]);
+            aiRideRatings[currentCharacter][i].push(asRides[i]);
+            aiRideRatings[currentCharacter][i].push(rating);
+        }
+        currentCharacter++;
+        if (currentCharacter == asCharacters.length) {
+            averageRatings();
+        }
+        else {
+            displayCharacter();
+            displayRides();
+        }
+    }
+    // once all the characters' ratings have been stored, this function calculates the average rating for each ride,
+    // sorts the array from by average rating in descending order, and displays it all to a p tag
+    function averageRatings() {
+        document.getElementById("avgRatings").innerHTML += "<b>AVERAGE RATINGS</b>";
+        for (i=0; i < asCharacters.length; i++) {
+            for (j=0; j < asRides.length; j++) {
+                aiSummary[j][1] += parseInt(aiRideRatings[i][j][2]);
+            }
+        }
+        for (i=0; i < aiSummary.length; i++) {
+            aiSummary[i][1] = (aiSummary[i][1] / asCharacters.length);
+        }
+
+        aiSummary.sort((a,b) => b[1] - a[1]);
+        for (i=0; i < aiSummary.length; i++) {
+            document.getElementById("avgRatings").innerHTML += "<p>" + aiSummary[i][0] + ", " + aiSummary[i][1] + "</p>";
+        }
+    }
+    // this function clears the data from my arrays and resets the page back to mickey
+    function clearData() {
+        aiSummary = [
+            ["JUNGLE CRUISE", 0], 
+            ["BIG THUNDER RAILROAD", 0], 
+            ["RISE OF THE RESISTANCE", 0],
+            ["SMUGGLER'S RUN", 0],
+            ["SPACE MOUNTAIN", 0],
+            ["BUZZ LIGHTYEAR", 0],
+            ["PETER PAN'S FLIGHT", 0]
+        ];
+        aiRideRatings = [
+            [[], [], [], [], [], [], []],
+            [[], [], [], [], [], [], []],
+            [[], [], [], [], [], [], []],
+            [[], [], [], [], [], [], []],
+            [[], [], [], [], [], [], []]
+        ];
+        currentCharacter = 0;
+        displayCharacter();
+        displayRides();
+        document.getElementById("avgRatings").innerHTML = ""
+    }
+</script>
+</body>
+</html>

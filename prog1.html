@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Braden Penner
+        // input F/L name, weight, and height in ft and inches
+        // convert heihgt to total inches
+        // calculate BMI
+        // determine if person is underweight, normal weight, overweight, or obese
+        // 2print results
+        let sFirstName = prompt("Enter your first name: ");
+        let sLastName = prompt("Enter your last name: ");
+        let iHeightFeet = parseInt(prompt("Enter your height in feet (input inches in next step): "));
+        let iHeightInches = parseInt(prompt("Enter the inches in your height: "));
+        let iWeight = parseInt(prompt("Enter your weight in pounds: "));
+        // Calculate BMI
+        let iTotalHeight = iHeightFeet * 12 + iHeightInches;
+        let fBMI = ((iWeight / (iTotalHeight * iTotalHeight)) * 703).toFixed(1);
+
+        // Use BMI to place them in a category
+        let sResult;
+        if (fBMI < 18.5) {
+            sResult = "Underweight";
+        } 
+        else if (fBMI < 25) {
+            sResult = "Normal Weight";
+        } 
+        else if (fBMI < 30) {
+            sResult = "Overweight";
+        } 
+        else {
+            sResult = "Obese";
+        }
+
+        // Display the outcome
+        console.log(`${sFirstName} ${sLastName}\nhas a BMI of ${fBMI} and is ${sCategory}`);
+    </script>
+</body>
+</html>

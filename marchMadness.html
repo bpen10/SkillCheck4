@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women's NCAA Basketball Tournament Bracket</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .bracket-container {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-top: 40px;
+    }
+    .region {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 200px;
+    }
+    .game {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #b72a2a;
+      border-radius: 5px;
+      background-color: white;
+    }
+    .game input {
+      width: 80px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .championship {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      border: 2px solid #b72a2a;
+      border-radius: 10px;
+      background-color: white;
+      width: 250px;
+      margin-top: 40px;
+    }
+    .championship input {
+      width: 100px;
+      text-align: center;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .bracket-header {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #b72a2a;
+      margin-bottom: 30px;
+    }
+    .line {
+      position: relative;
+      margin: 10px 0;
+      height: 2px;
+      background-color: #b72a2a;
+    }
+    .line::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 1px;
+      height: 20px;
+      background-color: #b72a2a;
+    }
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .region-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #b72a2a;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bracket-header">Women's NCAA Basketball Tournament Bracket</div>
+
+  <div class="bracket-container">
+    <!-- Region 1 -->
+    <div class="region">
+      <div class="region-title">Region 1</div>
+      <div class="game-container">
+        <div class="game">
+          <input type="text" placeholder="South Carolina" />
+          <input type="text" placeholder="Howard" />
+        </div>
+        <div class="line"></div>
+        <div class="game">
+          <input type="text" placeholder="Miami" />
+          <input type="text" placeholder="South Florida" />
+        </div>
+        <div class="line"></div>
+        <div class="game">
+          <input type="text" placeholder="Winner 1" />
+          <input type="text" placeholder="Winner 2" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Region 2 -->
+    <div class="region">
+      <div class="region-title">Region 2</div>
+      <div class="game-container">
+        <div class="game">
+          <input type="text" placeholder="Stanford" />
+          <input type="text" placeholder="Montana State" />
+        </div>
+        <div class="line"></div>
+        <div class="game">
+          <input type="text" placeholder="Georgie Tech" />
+          <input type="text" placeholder="Kansas" />
+        </div>
+        <div class="line"></div>
+        <div class="game">
+          <input type="text" placeholder="Winner 1" />
+          <input type="text" placeholder="Winner 2" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Region 3 -->
+    <div class="region">
+      <div class="region-title">Region 3</div>
+      <div class="game-container">
+        <div class="game">
+          <input type="text" placeholder="Louisville" />
+          <input type="text" placeholder="Albany" />
+        </div>
+        <div class="line"></div>
+        <div class="game">
+          <input type="text" placeholder="Gonzaga" />
+          <input type="text" placeholder="Nebraska" />
+        </div>
+        <div class="line"></div>
+        <div class="game">
+          <input type="text" placeholder="Winner 1" />
+          <input type="text" placeholder="Winner 2" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Region 4 -->
+    <div class="region">
+      <div class="region-title">Region 4</div>
+      <div class="game-container">
+        <div class="game">
+          <input type="text" placeholder="UConn" />
+          <input type="text" placeholder="Mercer" />
+        </div>
+        <div class="line"></div>
+        <div class="game">
+          <input type="text" placeholder="Kentucky" />
+          <input type="text" placeholder="Princeton" />
+        </div>
+        <div class="line"></div>
+        <div class="game">
+          <input type="text" placeholder="Winner 1" />
+          <input type="text" placeholder="Winner 2" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="championship">
+    <h2>Championship</h2>
+    <div class="game">
+      <input type="text" placeholder="Winner Final Four 1" />
+      <input type="text" placeholder="Winner Final Four 2" />
+    </div>
+  </div>
+
+  <div style="text-align: center;">
+    <button onclick="submitScores()">Submit Scores</button>
+  </div>
+
+  <script>
+    function submitScores() {
+      alert("Scores submitted!");
+    }
+  </script>
+
+</body>
+</html>

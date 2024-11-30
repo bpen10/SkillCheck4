@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label id="lblNumber" for="empInput">How many employees to enter?</label>
+    <input type="number" id="empInput" />
+    <br><br>
+    <button id="btnProcess" onclick="processEmps()">Continue</button>
+    <br>
+    <br>
+    <label id="lblName" for="empName" hidden>Enter employee name:</label>
+    <input type="text" id="empName" hidden/>
+    <br><br>
+    <label id="lblSalary" for="empSalary" hidden>Enter employee salary:</label>
+    <input type="text" id="empSalary" hidden/>  
+    <br><br>
+    <button id="btnGather" onclick="gatherData()" hidden>Process</button>    
+    <br><br>
+    <p id="avgSalary"></p>
+    <script>
+        let numEmps;
+        let cntEmps;
+        let empNames;
+        let salary;
+
+    function processEmps() {
+        cntEmps = 0;
+        empNames = [];
+        salary = [];
+
+        document.getElementById('avgSalary').innerHTML = '';
+        
+        numEmps = document.getElementByID('empInput').value;
+
+        document.getElementById('lblNumber').hidden = true;
+        document.getElementById('empInput').hidden = true;
+        document.getElementById('btnProcess').hidden = true;
+
+        document.getElementById('lblName').hidden = false;
+        document.getElementById('empName').hidden = false;
+        document.getElementById('lblSalary').hidden = false;
+        document.getElementById('empSalary').hidden = false;
+        document.getElementById('btnGather').hidden = false;
+
+        document.getElementById('empName').focus();        
+    }
+
+    function gatherData() {
+        empNames.push(document.getElementById('empName').value);
+        salary.push(document.getElementById('empSalary').value);
+
+        cntEmps++;
+
+        if (cntEmps >= numEmps) {
+            document.getElementById('avgSalary').innerHTML = calcAvg();
+
+            document.getElementById('lblNumber').hidden = false;
+            document.getElementById('empInput').hidden = false;
+            document.getElementById('btnProcess').hidden = false;
+        }
+    }
+    </script>
+</body>
+</html>

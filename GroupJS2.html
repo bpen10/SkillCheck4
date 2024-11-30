@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Rating System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #ff4500;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .icon-container img {
+            width: 30px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Rating System</h1>
+    <button onclick="getUserInput()">Rate Movies</button>
+
+    <div id="results"></div>
+
+    <script>
+        // Function 1: Collect user input
+        function getUserInput() {
+            let numMovies = prompt("How many movies would you like to rate?");
+            numMovies = parseInt(numMovies);
+            if (isNaN(numMovies) || numMovies <= 0) {
+                alert("Please enter a valid number of movies.");
+                return;
+            }
+
+            let numReviewers = prompt("How many people will rate each movie?");
+            numReviewers = parseInt(numReviewers);
+            if (isNaN(numReviewers) || numReviewers <= 0) {
+                alert("Please enter a valid number of reviewers.");
+                return;
+            }
+
+            for (let movieIndex = 1; movieIndex <= numMovies; movieIndex++) {
+                let movieTitle = prompt(`Enter the title for movie ${movieIndex}:`);
+                if (!movieTitle) {
+                    alert("Movie title cannot be empty!");
+                    return;
+                }
+
+                let ratings = [];
+                for (let reviewerIndex = 1; reviewerIndex <= numReviewers; reviewerIndex++) {
+                    let rating = prompt(`Reviewer ${reviewerIndex}, enter your rating for "${movieTitle}" (between 0 and 100):`);
+                    rating = parseFloat(rating);
+                    if (isNaN(rating) || rating < 0 || rating > 100) {
+                        alert("Invalid rating! Please enter a number between 0 and 100.");
+                        return;
+                    }
+                    ratings.push(rating);
+                }
+
+                // Call the function to calculate average rating and get category/icon
+                let result = calculateAverageRating(ratings, numReviewers);
+
+                // Call the function to display the results
+                displayResults(movieTitle, result.averageRating, result.category, result.iconHtml);
+            }
+        }
+
+        // Function 2: Calculate average rating and return category and icon
+        function calculateAverageRating(ratings, numReviewers) {
+            let averageRating = ratings.reduce((sum, rating) => sum + rating, 0) / numReviewers;
+            let category = "";
+            let iconHtml = "";
+
+            if (averageRating >= 90) {
+                category = "Smokin'";
+                iconHtml = '🌶️'.repeat(3); // 3 chili peppers
+            } else if (averageRating >= 75) {
+                category = "Pretty Hot";
+                iconHtml = '🌶️'.repeat(2); // 2 chili peppers
+            } else if (averageRating >= 50) {
+                category = "Mild";
+                iconHtml = '🌶️'; // 1 chili pepper
+            } else {
+                category = "Ice Cold";
+                iconHtml = '🧊'; // 1 ice cube
+            }
+
+            return {
+                averageRating: averageRating.toFixed(2),
+                category: category,
+                iconHtml: iconHtml
+            };
+        }
+
+        // Function 3: Display the results
+        function displayResults(movieTitle, averageRating, category, iconHtml) {
+            let resultsContainer = document.getElementById("results");
+
+            let resultHtml = `
+                <p><strong>${movieTitle}:</strong> Average Rating = ${averageRating}% (${category})</p>
+                <p>${iconHtml}</p>
+            `;
+
+            resultsContainer.innerHTML += resultHtml;
+        }
+    </script>
+</body>
+</html>
+
