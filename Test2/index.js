@@ -16,6 +16,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({extended: true}));
 
+// connect database from postgres
 const knex = require("knex") ({
     client : "pg",
     connection : {
@@ -27,6 +28,7 @@ const knex = require("knex") ({
     }
 });
 
+// get method that accesses the character landing page at the root route
 app.get('/', (req, res) => {
     knex('characters')
       .join('planets', 'planets.id', '=', 'characters.planet_name')
@@ -49,6 +51,7 @@ app.get('/', (req, res) => {
       });
   });
 
+  // get method that accesses and loads data to the character edit page
   app.get('/charEdit/:id', (req, res) => {
     let id = req.params.id;
     // Query the Character by ID first
@@ -77,6 +80,7 @@ app.get('/', (req, res) => {
       });
   });
 
+// get method that posts changes from the character edit page to the database
 app.post('/charEdit/:id', (req, res) => {
     const id = req.params.id;
     // Access each value directly from req.body
@@ -104,6 +108,7 @@ app.post('/charEdit/:id', (req, res) => {
       });
   });
 
+  // post method that deletes a character
   app.post('/charDelete/:id', (req, res) => {
     const id = req.params.id;
     knex('characters')
@@ -118,6 +123,7 @@ app.post('/charEdit/:id', (req, res) => {
       });
   });
 
+// get method that loads the character add page with the planets data
 app.get('/charAdd', (req, res) => {
     // Fetch planets to populate the dropdown
     knex('planets')
@@ -132,6 +138,7 @@ app.get('/charAdd', (req, res) => {
         });
 });
 
+// post method that posts new character data to the database
 app.post('/charAdd', (req, res) => {
     // Access each value directly from req.body
     const first_name = req.body.first_name;
@@ -157,6 +164,7 @@ app.post('/charAdd', (req, res) => {
       });
   });
 
+  // method that loads the planets landing page
 app.get('/planets', (req, res) => {
     knex('planets')
       .select(
@@ -174,6 +182,7 @@ app.get('/planets', (req, res) => {
       });
   });
 
+// get method that loads the planet edit page along with the specific planet's data
 app.get('/planEdit/:id', (req, res) => {
     let id = req.params.id;
     // Query the Planet by ID first
@@ -187,7 +196,8 @@ app.get('/planEdit/:id', (req, res) => {
         res.render('planEdit', { planet });
           })
 });
-  
+
+// post method that posts changes to the planet to the database
 app.post('/planEdit/:id', (req, res) => {
     const id = req.params.id;
     // Access each value directly from req.body
@@ -205,6 +215,7 @@ app.post('/planEdit/:id', (req, res) => {
         });
 });
 
+// post method that deletes a planet
 app.post('/planDelete/:id', (req, res) => {
     const id = req.params.id;
     knex('planets')
@@ -219,10 +230,12 @@ app.post('/planDelete/:id', (req, res) => {
       });
   });
 
-  app.get('/planAdd', (req, res) => {
+// get method that loads the planet add page
+app.get('/planAdd', (req, res) => {
     res.render('planAdd', {});
 });
 
+// post method that posts new planet data to the database
 app.post('/planAdd', (req, res) => {
     // Access each value directly from req.body
     const planet_name = req.body.planet_name;
